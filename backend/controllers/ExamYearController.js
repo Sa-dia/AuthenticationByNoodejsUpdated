@@ -27,11 +27,13 @@ const uploadExamYearAsXML = async (req, res) => {
                 const Exam_year = row.Exam_year&& row.Exam_year[0];
                 const Year = row.Year && row.Year[0];
                 const Semester=row.Semester && row.Semester[0];
+                const Start_date=row.Start_date && row.Start_date[0];
+                const End_date=row.End_date && row.End_date[0];
                
                 // Check if all required fields are present
-                if (session_id && Education_level && Exam_year && Year && Semester) {
+                if (session_id && Education_level && Exam_year && Year && Semester && Start_date && End_date) {
                     // const hashedPassword = await bcrypt.hash(Password, 10);
-                    await insertXmlExamYearIntoDatabase({ exam_year_id,session_id,Education_level,Exam_year,Year,Semester});
+                    await insertXmlExamYearIntoDatabase({ exam_year_id,session_id,Education_level,Exam_year,Year,Semester,Start_date,End_date});
                 } else {
                     console.warn('Skipping incomplete row:', row);
                 }
@@ -47,8 +49,8 @@ const uploadExamYearAsXML = async (req, res) => {
 // Function to insert department data into the database
 const insertXmlExamYearIntoDatabase = (row) => {
     return new Promise((resolve, reject) => {
-        const query = 'INSERT INTO ExamYear(exam_year_id,session_id,Education_level,Exam_year,Year,Semester) VALUES (?, ?, ?, ?, ?,?)';
-        db.query(query, [row.exam_year_id,row.session_id,row.Education_level,row.Exam_year,row.Year,row.Semester], (err, results) => {
+        const query = 'INSERT INTO ExamYear(exam_year_id,session_id,Education_level,Exam_year,Year,Semester,Start_date,End_date) VALUES (?, ?, ?, ?, ?,?,?,?)';
+        db.query(query, [row.exam_year_id,row.session_id,row.Education_level,row.Exam_year,row.Year,row.Semester,row.Start_date,row.End_date], (err, results) => {
             if (err) {
                 reject(err);
             } else {

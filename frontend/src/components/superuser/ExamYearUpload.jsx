@@ -23,7 +23,6 @@ const ExamYearUpload = () => {
         return xml;
     };
 
-
     const handleUpload = () => {
         if (file) {
             Papa.parse(file, {

@@ -9,6 +9,8 @@ CREATE TABLE IF NOT EXISTS ExamYear (
     Exam_year INT NOT NULL,
     Year INT NOT NULL,
     Semester INT NOT NULL,
+    Start_date DATE,
+    End_date DATE,
     FOREIGN KEY (session_id) REFERENCES Session(Session_id)
 );
 `;

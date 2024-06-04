@@ -18,19 +18,30 @@ app.use(fileUpload());
 const { createSuperUserTable } = require('./models/superUserModel');
 const { createXmlDataDeptTable } = require('./models/DeptModel');
 const { createXmlDataTeacherTable } = require('./models/teacherModel');
-
+const { createXmlDataSessionTable } = require('./models/SessionModel');
+const { createXmlDataStudentTable}= require('./models/StudentModel');
+const {createXmlDataExamYearTable}=require('./models/ExamYearModel');
 createSuperUserTable();
 createXmlDataDeptTable();
 createXmlDataTeacherTable();
+createXmlDataSessionTable(); 
+createXmlDataStudentTable();
+createXmlDataExamYearTable();
 
 // Routes
 const superUserRoutes = require('./routes/superUserRoutes');
 const DeptRoutes = require('./routes/DeptRoutes');
 const teacherRoutes = require('./routes/teacherRoutes');
+const SessionRoutes=require('./routes/SessionRoutes');
+const StudentRoutes=require('./routes/StudentRoutes');
+const ExamYearRoutes=require('./routes/ExamYearRoutes');
 
 app.use('/api', superUserRoutes);
 app.use('/api', DeptRoutes);
 app.use('/api', teacherRoutes);
+app.use('/api',SessionRoutes);
+app.use('/api',StudentRoutes);
+app.use('/api',ExamYearRoutes);
 
 // Protected route example
 app.get('/api/protected', verifyToken, (req, res) => {
